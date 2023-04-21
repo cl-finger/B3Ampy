@@ -10,12 +10,12 @@ Claudia Finger
 claudia.finger@ieg.fraunhofer.de
 ---
 List of Publications:
-Finger, C. and Löer, K.: Depth of sudden velocity increases from multi-mode Rayleigh waves derived with three-component ambient noise beamforming, EGU General Assembly 2023, Vienna, Austria, 24–28 Apr 2023, EGU23-12396, https://doi.org/10.5194/egusphere-egu23-12396, 2023. 
-Löer, K., Finger, C., Obiri, E., and Kennedy, H.: A comprehensive beamforming toolbox to characterise surface and body waves in three-component ambient noise wavefields, EGU General Assembly 2023, Vienna, Austria, 24–28 Apr 2023, EGU23-5670, https://doi.org/10.5194/egusphere-egu23-5670, 2023. 
-Löer, K., Toledo, T., Norini, G., Zhang, X., Curtis, A., Saenger, E.H.: Imaging the Deep Structures of Los Humeros Geothermal Field, Mexico, Using Three‐Component Seismic Noise Beamforming, Seismological Research Letters (2020) 91 (6): 3269–3277.
-Katrin Löer, Nima Riahi, Erik H Saenger, Three-component ambient noise beamforming in the Parkfield area, Geophysical Journal International, Volume 213, Issue 3, June 2018, Pages 1478–1491, https://doi.org/10.1093/gji/ggy058
-Riahi, N., and Saenger, E. H. (2014), Rayleigh and Love wave anisotropy in Southern California using seismic noise, Geophys. Res. Lett., 41, 363– 369, doi:10.1002/2013GL058518.
-Riahi, N., Bokelmann, G., Sala, P., and Saenger, E. H. (2013), Time-lapse analysis of ambient surface wave anisotropy: A three-component array study above an underground gas storage, J. Geophys. Res. Solid Earth, 118, 5339– 5351, doi:10.1002/jgrb.50375.
+- Finger, C. and Löer, K.: Depth of sudden velocity increases from multi-mode Rayleigh waves derived with three-component ambient noise beamforming, EGU General Assembly 2023, Vienna, Austria, 24–28 Apr 2023, EGU23-12396, [[https://doi.org/10.5194/egusphere-egu23-12396]], 2023. 
+- Löer, K., Finger, C., Obiri, E., and Kennedy, H.: A comprehensive beamforming toolbox to characterise surface and body waves in three-component ambient noise wavefields, EGU General Assembly 2023, Vienna, Austria, 24–28 Apr 2023, EGU23-5670, [[https://doi.org/10.5194/egusphere-egu23-5670]], 2023. 
+- Löer, K., Toledo, T., Norini, G., Zhang, X., Curtis, A., Saenger, E.H.: Imaging the Deep Structures of Los Humeros Geothermal Field, Mexico, Using Three‐Component Seismic Noise Beamforming, Seismological Research Letters (2020) 91 (6): 3269–3277.
+- Katrin Löer, Nima Riahi, Erik H Saenger, Three-component ambient noise beamforming in the Parkfield area, Geophysical Journal International, Volume 213, Issue 3, June 2018, Pages 1478–1491, https://doi.org/10.1093/gji/ggy058
+- Riahi, N., and Saenger, E. H. (2014), Rayleigh and Love wave anisotropy in Southern California using seismic noise, Geophys. Res. Lett., 41, 363– 369, doi:10.1002/2013GL058518.
+- Riahi, N., Bokelmann, G., Sala, P., and Saenger, E. H. (2013), Time-lapse analysis of ambient surface wave anisotropy: A three-component array study above an underground gas storage, J. Geophys. Res. Solid Earth, 118, 5339– 5351, doi:10.1002/jgrb.50375.
 ---
 
 0) What you need
