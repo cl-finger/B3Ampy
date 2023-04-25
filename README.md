@@ -8,7 +8,7 @@ claudia.finger@ieg.fraunhofer.de
 
 
 Matlab Version of this code:
-github.com/katrinloer/B3AM
+[github.com/katrinloer/B3AM](www.github.com/katrinloer/B3AM)
 ---
 version 0.1 (25.04.2023)
 - no guarantee for completeness or correctness
