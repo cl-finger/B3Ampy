@@ -1,6 +1,6 @@
 B3Ampy User Guide
 
-![](b3ampy_logo.png)
+<img src="./b3ampy_logo.png" alt="app-screen" width="300" />
 
 written by 
 Claudia Finger
