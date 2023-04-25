@@ -1,13 +1,20 @@
 B3Ampy User Guide
----
-version 0.1
-(no guarantee for completeness or correctness)
-(not everything is implemented yet)
-(Testers and Feedback are very welcome)
+
+![](b3ampy_logo.png)
 
 written by 
 Claudia Finger
 claudia.finger@ieg.fraunhofer.de
+
+
+Matlab Version of this code:
+github.com/katrinloer/B3AM
+---
+version 0.1 (25.04.2023)
+- no guarantee for completeness or correctness
+- not everything is implemented yet
+- Testers and Feedback are very welcome!
+
 ---
 List of Publications:
 - Finger, C. and Löer, K.: Depth of sudden velocity increases from multi-mode Rayleigh waves derived with three-component ambient noise beamforming, EGU General Assembly 2023, Vienna, Austria, 24–28 Apr 2023, EGU23-12396, [[https://doi.org/10.5194/egusphere-egu23-12396]], 2023. 
