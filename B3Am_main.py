@@ -75,6 +75,7 @@ for ii in range(params.nstations):
 data = np.load(params.indir+params.indata)
 print('Loaded 3C waveform data with size '+str(data.shape))
 
+
 ######################################
 ### perform pre-processing of data ###
 ######################################
@@ -95,8 +96,17 @@ for ii in range(params.nstations):
 	data_x[ii,:] = data[0,ii,:]
 	data_y[ii,:] = data[1,ii,:]
 	data_z[ii,:] = data[2,ii,:]
+
+#taper data
+window = window = signal.windows.tukey(data_x.shape[1],alpha=0.25)
+for ii in range(params.nstations):
+    data_x[ii,:] = data_x[ii,:]*window
+    data_y[ii,:] = data_y[ii,:]*window
+    data_z[ii,:] = data_z[ii,:]*window
+
 data_final = np.concatenate((data_x,data_y,data_z),axis=0)
 print('Reorganised data for all '+str(params.nstations)+' stations. Data has new shape ',data_final.shape)
+
 
 ###########################################
 ### define resolution for FK parameters ###
@@ -106,7 +116,7 @@ params = fkr.FK_resolution(params,coords)
 ###########################################################
 ### calculate STFFT (short time fast fourier transform) ###
 ###########################################################
-longest_window = 4/params.fmin*params.sampling_rate
+longest_window = params.tw_factor/params.fmin*params.sampling_rate
 params.nwin = int(np.power(2,np.ceil(np.log(longest_window)/np.log(2)))) 
 length_each_ft = params.sampling_rate/params.fstep
 params.nfft = int(np.power(2,np.ceil(np.log(length_each_ft)/np.log(2))))
@@ -115,9 +125,12 @@ if params.nfft < params.nwin:
 print('Length of each time window is '+str(params.nwin)+' points = '+str(params.nwin/params.sampling_rate)+' s with 50% overlap')
 print('Frequency resolution is '+str(params.sampling_rate/params.nfft)+' Hz')
 for ii in range(params.nstations):
-	f_,t,DFTE = signal.stft(np.squeeze(data_final[ii,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft)   #default: noverlap = 0.5*nwin
-	f_,t,DFTN = signal.stft(np.squeeze(data_final[ii+params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft)
-	f_,t,DFTZ = signal.stft(np.squeeze(data_final[ii+2*params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft)
+	#f_,t,DFTE = signal.stft(np.squeeze(data_final[ii,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft,scaling='psd')   #default: noverlap = 0.5*nwin
+	#f_,t,DFTN = signal.stft(np.squeeze(data_final[ii+params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft,scaling='psd')
+	#f_,t,DFTZ = signal.stft(np.squeeze(data_final[ii+2*params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft,scaling='psd')
+	f_,t,DFTE = signal.spectrogram(np.squeeze(data_final[ii,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')   #default: noverlap = 0.5*nwin
+	f_,t,DFTN = signal.spectrogram(np.squeeze(data_final[ii+params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')
+	f_,t,DFTZ = signal.spectrogram(np.squeeze(data_final[ii+2*params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')
 	if ii ==0:
 		#create mask for desired frequencies
 		f_mask1 = f_>=params.fmin
