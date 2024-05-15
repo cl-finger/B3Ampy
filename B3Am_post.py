@@ -219,24 +219,24 @@ plot_statistics(results_pro,'pro')
 ############################
 
 # P
-H_k_P, yedges_k_P,xedges_k_P = np.histogram2d(results_P[:,1], results_P[:,6],bins=[bins_frequencies,bins_k],weights = results_P[:,9],normed = True)
-H_dip_P, yedges_dip_P,xedges_dip_P = np.histogram2d(results_P[:,1], results_P[:,3],bins=[bins_frequencies,bins_dip],weights = results_P[:,9],normed=True)
-H_th_P, yedges_th_P,xedges_th_P = np.histogram2d(results_P[:,1], results_P[:,2],bins=[bins_frequencies,bins_th],weights = results_P[:,9],normed=True)
+H_k_P, yedges_k_P,xedges_k_P = np.histogram2d(results_P[:,1], results_P[:,6],bins=[bins_frequencies,bins_k],weights = results_P[:,9],density = True)
+H_dip_P, yedges_dip_P,xedges_dip_P = np.histogram2d(results_P[:,1], results_P[:,3],bins=[bins_frequencies,bins_dip],weights = results_P[:,9],density=True)
+H_th_P, yedges_th_P,xedges_th_P = np.histogram2d(results_P[:,1], results_P[:,2],bins=[bins_frequencies,bins_th],weights = results_P[:,9],density=True)
 # SV
-H_k_SV, yedges_k_SV,xedges_k_SV = np.histogram2d(results_SV[:,1], results_SV[:,6],bins=[bins_frequencies,bins_k],weights = results_SV[:,9],normed = True)
-H_dip_SV, yedges_dip_SV,xedges_dip_SV = np.histogram2d(results_SV[:,1], results_SV[:,3],bins=[bins_frequencies,bins_dip],weights = results_SV[:,9],normed=True)
-H_th_SV, yedges_th_SV,xedges_th_SV = np.histogram2d(results_SV[:,1], results_SV[:,2],bins=[bins_frequencies,bins_th],weights = results_SV[:,9],normed=True)
+H_k_SV, yedges_k_SV,xedges_k_SV = np.histogram2d(results_SV[:,1], results_SV[:,6],bins=[bins_frequencies,bins_k],weights = results_SV[:,9],density = True)
+H_dip_SV, yedges_dip_SV,xedges_dip_SV = np.histogram2d(results_SV[:,1], results_SV[:,3],bins=[bins_frequencies,bins_dip],weights = results_SV[:,9],density=True)
+H_th_SV, yedges_th_SV,xedges_th_SV = np.histogram2d(results_SV[:,1], results_SV[:,2],bins=[bins_frequencies,bins_th],weights = results_SV[:,9],density=True)
 # SH
-H_k_SH, yedges_k_SH,xedges_k_SH = np.histogram2d(results_SH[:,1], results_SH[:,6],bins=[bins_frequencies,bins_k],weights = results_SH[:,9],normed = True)
-H_th_SH, yedges_th_SH,xedges_th_SH = np.histogram2d(results_SH[:,1], results_SH[:,2],bins=[bins_frequencies,bins_th],weights = results_SH[:,9],normed=True)
+H_k_SH, yedges_k_SH,xedges_k_SH = np.histogram2d(results_SH[:,1], results_SH[:,6],bins=[bins_frequencies,bins_k],weights = results_SH[:,9],density = True)
+H_th_SH, yedges_th_SH,xedges_th_SH = np.histogram2d(results_SH[:,1], results_SH[:,2],bins=[bins_frequencies,bins_th],weights = results_SH[:,9],density=True)
 # retro
-H_k_retro, yedges_k_retro,xedges_k_retro = np.histogram2d(results_retro[:,1], results_retro[:,6],bins=[bins_frequencies,bins_k],weights = results_retro[:,9],normed = True)
-H_ell_retro, yedges_ell_retro,xedges_ell_retro = np.histogram2d(results_retro[:,1], results_retro[:,4],bins=[bins_frequencies,bins_ell],weights = results_retro[:,9],normed=True)
-H_th_retro, yedges_th_retro,xedges_th_retro = np.histogram2d(results_retro[:,1], results_retro[:,2],bins=[bins_frequencies,bins_th],weights = results_retro[:,9],normed=True)
+H_k_retro, yedges_k_retro,xedges_k_retro = np.histogram2d(results_retro[:,1], results_retro[:,6],bins=[bins_frequencies,bins_k],weights = results_retro[:,9],density = True)
+H_ell_retro, yedges_ell_retro,xedges_ell_retro = np.histogram2d(results_retro[:,1], results_retro[:,4],bins=[bins_frequencies,bins_ell],weights = results_retro[:,9],density=True)
+H_th_retro, yedges_th_retro,xedges_th_retro = np.histogram2d(results_retro[:,1], results_retro[:,2],bins=[bins_frequencies,bins_th],weights = results_retro[:,9],density=True)
 # pro
-H_k_pro, yedges_k_pro,xedges_k_pro = np.histogram2d(results_pro[:,1], results_pro[:,6],bins=[bins_frequencies,bins_k],weights = results_pro[:,9],normed = True)
-H_ell_pro, yedges_ell_pro,xedges_ell_pro = np.histogram2d(results_pro[:,1], results_pro[:,4],bins=[bins_frequencies,bins_ell],weights = results_pro[:,9],normed=True)
-H_th_pro, yedges_th_pro,xedges_th_pro = np.histogram2d(results_pro[:,1], results_pro[:,2],bins=[bins_frequencies,bins_th],weights = results_pro[:,9],normed=True)
+H_k_pro, yedges_k_pro,xedges_k_pro = np.histogram2d(results_pro[:,1], results_pro[:,6],bins=[bins_frequencies,bins_k],weights = results_pro[:,9],density = True)
+H_ell_pro, yedges_ell_pro,xedges_ell_pro = np.histogram2d(results_pro[:,1], results_pro[:,4],bins=[bins_frequencies,bins_ell],weights = results_pro[:,9],density=True)
+H_th_pro, yedges_th_pro,xedges_th_pro = np.histogram2d(results_pro[:,1], results_pro[:,2],bins=[bins_frequencies,bins_th],weights = results_pro[:,9],density=True)
 
 ##########################################
 ### pick local maxima from histograms  ###
