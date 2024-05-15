@@ -14,7 +14,7 @@ from scipy import sparse
 import matplotlib as mpl 
 mpl.use('Agg')
 import matplotlib.pyplot as plt
-font = {'size':22}
+font = {'size':18}
 plt.rc('font',**font)
 
 # load B3Ampy functions
@@ -83,8 +83,14 @@ ax.add_artist(circle)
 ax4 = fig.add_subplot(233)
 ax4.plot((params.fmin,params.fmax),(params.fmin/params.kmax,params.fmax/params.kmax),lw=2,c='k')
 ax4.plot((params.fmin,params.fmax),(params.fmin/params.kmin,params.fmax/params.kmin),lw=2,c='k')
+ax4.plot((params.fmin,params.fmax),(params.fmin/params.kmin,params.fmin/params.kmin),lw=2,c='r')
+ax4.plot((params.fmin,params.fmax),(params.fmax/params.kmax,params.fmax/params.kmax),lw=2,c='r')
+ax4.plot((params.fmin,params.fmin),(params.fmax/params.kmax,params.fmin/params.kmin),lw=2,c='r')
+ax4.plot((params.fmax,params.fmax),(params.fmax/params.kmax,params.fmin/params.kmin),lw=2,c='r',label='frequency and velocity limits')
 ax4.set_ylabel('velocity (m/s)')
 ax4.set_xlabel('frequency (Hz)')
+ax4.legend(loc='lower left',bbox_to_anchor=(0,1))
+ax4.set_aspect((params.fmax/(params.fmax/params.kmin)))
 
 ax2=fig.add_subplot(235)
 for ii in range(km_sum.shape[1]):
@@ -100,16 +106,17 @@ ax2.text(1.5*np.max(kgrid_plot),0,
 	'k max = '+str(np.round(params.kmax,5))+' /m \n'+
 	'f min = '+str(params.fmin)+' Hz \n'+
 	'f max = '+str(params.fmax)+' Hz \n'+
-	'v min = '+str(np.round(params.fmin/params.kmax,1))+' m/s \n'+
-	'v max = '+str(np.round(params.fmax/params.kmin,1))+' m/s \n'
+	'v min = '+str(np.round(params.fmax/params.kmax,1))+' m/s \n'+
+	'v max = '+str(np.round(params.fmin/params.kmin,1))+' m/s \n'
 	,fontsize=26)
 ax2.set_aspect(kmax_plot/1)
 
 ax3=fig.add_subplot(234)
 ax3.hist(dist.flatten(),color='k',bins=20)
-ax3.set_xlabel('distance between receivers')
+ax3.set_xlabel('distance between receivers (m)')
 ax3.set_ylabel('count')
 ax3.set_aspect(4*np.nanmax(dist)/params.nstations**2)
 
-plt.tight_layout(w_pad=-9,h_pad=-2)
+#plt.tight_layout(w_pad=-9,h_pad=-2)
+plt.tight_layout(w_pad=-12,h_pad=-2)
 fig.savefig(params.outdir+'array_response_and_FK_resolution.png',dpi=300)
