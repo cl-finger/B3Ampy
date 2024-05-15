@@ -40,9 +40,10 @@ FT_fmax = 0.8					# maximum frequency (Hz) to save Fourier Transform
 FT_fstep = 0.1 					# largest allowed frequency resolution (must be larger than fmin/4 or will be automatically corrected)
 
 # Defaults for short-time fast-fourier transformation:
-# time window length is calculated as next power of 2 of 4/fmin
+# time window length is calculated as next power of 2 of tw_factor/fmin
+tw_factor = 10 # should be at least 4
+ 
 # time windows have 50% overlap
-
 ######################
 ### FK calculation ###
 ######################
@@ -61,7 +62,7 @@ ell_res = 0.05					#
 ### find peaks in beam power response ###
 #########################################
 min_beam_threshold = 0.7 			# range 0 to 1: threshold for extrema found in beam power response  
-want_multi_peak = True 				# False: only look for one maximum in each f-t window, True: look for multiple peaks in each beam power response with limit in next line, 
+want_multi_peak = False 				# False: only look for one maximum in each f-t window, True: look for multiple peaks in each beam power response with limit in next line, 
 no_maxima = 5					# maximum number of maxima to be found, e.g. try 5
 min_dist_maxima = 10 				# minimum distance between multiple maxima per beam power plot, in points (multiply by resolution) 
 
