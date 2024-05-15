@@ -41,7 +41,7 @@ FT_fstep = 0.1 					# largest allowed frequency resolution (must be larger than 
 
 # Defaults for short-time fast-fourier transformation:
 # time window length is calculated as next power of 2 of tw_factor/fmin
-tw_factor = 10 # should be at least 4
+tw_factor = 4 # should be at least 4
  
 # time windows have 50% overlap
 ######################
