@@ -31,7 +31,7 @@ def compute_mode_vector(params,coords):
 	Z = p2c.polpar2cmplx(params.polstates)
          
 	# Initialize 3C mode vector test matrix
-	ka = np.zeros((3*km.shape[0],params.npolstates*km.shape[1]),dtype=complex)
+	ka = np.zeros((3*km.shape[0],params.npolstates*km.shape[1]),dtype=np.csingle) #19.07.24 changed data type from complex to np.csingle to save on computation time
 	for ik in range(km.shape[1]): # for each wavenumber grid point
 		#wave vector azimuth
 		phi0=np.arctan2(k[1,ik],k[0,ik])
