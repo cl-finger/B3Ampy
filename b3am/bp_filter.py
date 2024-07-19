@@ -25,6 +25,6 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order):
         y = sosfiltfilt(sos, data)
         return y
 def butter_lowpass_filter(data, highcut, fs, order):
-        sos = butter_bandpass( highcut, fs, order)
+        sos = butter_lowpass( highcut, fs, order)
         y = sosfiltfilt(sos, data)
         return y
