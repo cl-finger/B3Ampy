@@ -68,7 +68,8 @@ def calculate_results(DFTES,DFTNS,DFTZS,params,f0,ka):
                 float(ind_kgrid),               #wavenumber (/m)
                 f0/float(ind_kgrid),            #velocity (m/s)
                 P[int(ind_max_x),int(ind_max_y),ii],    #absolute beam power
-                P_norm[int(ind_max_x),int(ind_max_y)]/np.mean(P_norm[:,:])) #signal-t-noise-ratio of beam power peak
+                P_norm[int(ind_max_x),int(ind_max_y)]/np.mean(P_norm[:,:]) #signal-t-noise-ratio of beam power peak
+		ii)				#time window number	
 
             if ii == 0 and jj == 0:
                 results = results_tmp[ii,jj,:].reshape(1,10)
