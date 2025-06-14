@@ -34,7 +34,7 @@ def calculate_results(DFTES,DFTNS,DFTZS,params,f0,ka):
         S = csdm.compute_SDM(f0,data_allcomp)
         P,Q,params = cbp.get_beampower_SDM(S,ka,params)
 
-    results_tmp = np.zeros((params.Nt,params.no_maxima,10)) #initialise array with results from maxima
+    results_tmp = np.zeros((params.Nt,params.no_maxima,11)) #initialise array with results from maxima
     for ii in range(params.Nt): #loop over all time windows
         print('Getting wave parameters at maxima for time window '+str(ii+1)+' of '+str(params.Nt))
         #P_norm = ((P[:,:,ii])/np.nanmax(np.abs(P[:,:,ii])))**2 #normalise beam response
@@ -68,13 +68,13 @@ def calculate_results(DFTES,DFTNS,DFTZS,params,f0,ka):
                 float(ind_kgrid),               #wavenumber (/m)
                 f0/float(ind_kgrid),            #velocity (m/s)
                 P[int(ind_max_x),int(ind_max_y),ii],    #absolute beam power
-                P_norm[int(ind_max_x),int(ind_max_y)]/np.mean(P_norm[:,:]) #signal-t-noise-ratio of beam power peak
+                P_norm[int(ind_max_x),int(ind_max_y)]/np.mean(P_norm[:,:]), #signal-t-noise-ratio of beam power peak
 		ii)				#time window number	
 
             if ii == 0 and jj == 0:
-                results = results_tmp[ii,jj,:].reshape(1,10)
+                results = results_tmp[ii,jj,:].reshape(1,11)
             else:
-                results = np.append(results,results_tmp[ii,jj,:].reshape(1,10),axis=0)
+                results = np.append(results,results_tmp[ii,jj,:].reshape(1,11),axis=0)
         else:
             ind_max_x,ind_max_y = ex.extrema(P_norm,params.min_beam_threshold,params.min_dist_maxima,params.no_maxima)
             ind_kth = np.zeros(ind_max_x.size)
@@ -107,8 +107,8 @@ def calculate_results(DFTES,DFTNS,DFTZS,params,f0,ka):
                     float(ind_kgrid[jj]),           #wavenumber (/m)
                     f0/float(ind_kgrid[jj]),                #velocity (m/s)
                     P[int(ind_max_x[jj]),int(ind_max_y[jj]),ii],    #absolute beam power
-                    P_norm[int(ind_max_x[jj]),int(ind_max_y[jj])]/np.mean(P_norm[:,:])) #signal-t-noise-ratio of beam power peak
-
+                    P_norm[int(ind_max_x[jj]),int(ind_max_y[jj])]/np.mean(P_norm[:,:]), #signal-t-noise-ratio of beam power peak
+			ii)		#time window number
                 if ii == 0 and jj == 0:
                     results = results_tmp[ii,jj,:].reshape(1,10)
                 else:
