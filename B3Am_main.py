@@ -151,7 +151,7 @@ for ii in range(params.nstations):
 	DFTES[:,:,ii] = DFTE[f_mask,:]
 	DFTNS[:,:,ii] = DFTN[f_mask,:]
 	DFTZS[:,:,ii] = DFTZ[f_mask,:]
-print('Number of frequencies = '+params.f.size)
+print('Number of frequencies = '+str(params.f.size))
 print('Frequency resolution is '+str(params.f[1]-params.f[0])+' Hz')
 print('Length of each time window is '+str(params.nwin)+' points = '+str(params.nwin/params.sampling_rate)+' s with 50% overlap')
 print('Computed spectrograms and stored them in container for each component with shape '+str(DFTES.shape))
