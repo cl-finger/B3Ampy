@@ -121,12 +121,7 @@ length_each_ft = params.sampling_rate/params.fstep
 params.nfft = int(np.power(2,np.ceil(np.log(length_each_ft)/np.log(2))))
 if params.nfft < params.nwin:
 	params.nfft = params.nwin
-print('Length of each time window is '+str(params.nwin)+' points = '+str(params.nwin/params.sampling_rate)+' s with 50% overlap')
-print('Frequency resolution is '+str(params.sampling_rate/params.nfft)+' Hz')
 for ii in range(params.nstations):
-	#f_,t,DFTE = signal.stft(np.squeeze(data_final[ii,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft,scaling='psd')   #default: noverlap = 0.5*nwin
-	#f_,t,DFTN = signal.stft(np.squeeze(data_final[ii+params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft,scaling='psd')
-	#f_,t,DFTZ = signal.stft(np.squeeze(data_final[ii+2*params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,nfft=params.nfft,scaling='psd')
 	f_,t,DFTE = signal.spectrogram(np.squeeze(data_final[ii,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')   #default: noverlap = 0.5*nwin
 	f_,t,DFTN = signal.spectrogram(np.squeeze(data_final[ii+params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')
 	f_,t,DFTZ = signal.spectrogram(np.squeeze(data_final[ii+2*params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')
@@ -135,6 +130,19 @@ for ii in range(params.nstations):
 		f_mask1 = f_>=params.fmin
 		f_mask2 = f_<=params.fmax
 		f_mask = f_mask1*f_mask2
+		
+		selected_freqs = f_[f_mask]
+		# select max_nfreq evenly spaced frequencies within the selected frequency range
+		if len(selected_freqs)>params.max_nfreq:
+			step_size = len(selected_freqs) // params.max_nfreq		
+			selected_indices = np.arange(0,len(selected_freqs),step_size)[:params.max_nfreq]
+			fmax_new = np.zeros_like(f_mask, dtype=bool)
+			f_mask_new[np.where(f_mask)[0][selected_indices]] = True
+			params.f = f_[f_mask_new]
+			f_mask = f_mask_new
+		else:
+			params.f = selected_freqs
+
 		params.f = f_[f_mask]
 		DFTES = np.zeros((params.f.size,t.size,params.nstations),dtype=complex)
 		DFTNS = np.zeros((params.f.size,t.size,params.nstations),dtype=complex)
@@ -143,6 +151,9 @@ for ii in range(params.nstations):
 	DFTES[:,:,ii] = DFTE[f_mask,:]
 	DFTNS[:,:,ii] = DFTN[f_mask,:]
 	DFTZS[:,:,ii] = DFTZ[f_mask,:]
+print('Number of frequencies = '+params.f.size)
+print('Frequency resolution is '+str(params.f[1]-params.f[0])+' Hz')
+print('Length of each time window is '+str(params.nwin)+' points = '+str(params.nwin/params.sampling_rate)+' s with 50% overlap')
 print('Computed spectrograms and stored them in container for each component with shape '+str(DFTES.shape))
 
 ###########################
