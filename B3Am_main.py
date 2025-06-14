@@ -136,7 +136,7 @@ for ii in range(params.nstations):
 		if len(selected_freqs)>params.max_nfreq:
 			step_size = len(selected_freqs) // params.max_nfreq		
 			selected_indices = np.arange(0,len(selected_freqs),step_size)[:params.max_nfreq]
-			fmax_new = np.zeros_like(f_mask, dtype=bool)
+			f_mask_new = np.zeros_like(f_mask, dtype=bool)
 			f_mask_new[np.where(f_mask)[0][selected_indices]] = True
 			params.f = f_[f_mask_new]
 			f_mask = f_mask_new
