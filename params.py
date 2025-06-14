@@ -24,7 +24,7 @@ want_beampowerplots = True 			# if True: generate 1 figure per frequency and tim
 ### pre-processing ###
 ######################
 want_specwhite = False				# use spectral whitening: NOT IMPLEMENTED
-want_onebit = False				# use one bit time normalisation: NOT IMPLEMENTED
+want_onebit = False				# use one bit time normalisation
 want_down_sampling = False			# if True: downsample data to sampling_rate in next line
 if want_down_sampling:
 	sampling_rate_new = 100			# Hz, desired sampling rate

@@ -82,8 +82,7 @@ print('Loaded 3C waveform data with size '+str(data.shape))
 if params.want_down_sampling:
 	params,data = pp.downsampling(params,data)
 if params.want_onebit:
-	#NOT IMPLEMENTED
-	test = 0
+	params,data = pp.onebit_norm(params,data)
 if params.want_specwhite:
 	#NOT IMPLEMENTED
 	test = 0	

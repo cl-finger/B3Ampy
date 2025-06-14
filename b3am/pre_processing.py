@@ -27,7 +27,12 @@ def downsampling(params,data):
 	return params,data_ds
 
 # def 1bit_norm
-
+def onebit_norm(params, data):
+        data_1bit = np.zeros_like(data)
+        for rr in range(params.nstations): # Loop over all stations
+                if np.sum(np.abs(data[:, rr, :])) > 0: # Exclude stations with no data at this day
+                        data_1bit[:, rr, :] = np.sign(data[:, rr, :]) # Apply one-bit normalization for all components and at all time
+        return params, data_1bit
 # def time_norm
 
 # def spectral_white
