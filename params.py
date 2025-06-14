@@ -37,7 +37,7 @@ else:
 want_custom_frange = False 			# True: Use freuqency limits for Fourier Transform from next lines, False: calculate frequency range from station spacing
 FT_fmin = 0.1					# minimum frequency (Hz) to save Fourier Transform
 FT_fmax = 0.8					# maximum frequency (Hz) to save Fourier Transform
-max_nfreqs = 24					# Frequency resolution is determined through the time window length by FT_fmin/tw_factor. Choose here a maximum number of Frequencies to avoid too many
+max_nfreq = 24					# Frequency resolution is determined through the time window length by FT_fmin/tw_factor. Choose here a maximum number of Frequencies to avoid too many
 # in previous version, fstep could be defined but was overwritten most of the time
 #FT_fstep = 0.1 					# largest allowed frequency resolution (must be larger than fmin/4 or will be automatically corrected)
 
