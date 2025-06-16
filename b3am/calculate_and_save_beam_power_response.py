@@ -153,4 +153,4 @@ def calculate_results(DFTES,DFTNS,DFTZS,params,f0,ka):
             fig.savefig(params.outdir+'PICS_f'+str(f0)+'/'+'beampower_f'+str(f0)+'_t'+str(ii+1)+'.png')
             plt.close(fig)
     #save results in one file per frequency as list (each row is one time window or one maxima)
-    np.savetxt(params.outdir+'results_f'+str(f0)+'.txt',results,header='wave type, freq (Hz), azimuth (deg), dip (deg), elliptcity, rotation x (deg), wavenumber (/m), velocity (m/s), max norm beam power, SNR',fmt = '%d, %.4f, %.2f, %.2f, %.3f, %.2f, %.4e, %.2f, %.4e, %.2f')
+    np.savetxt(params.outdir+'results_f'+str(f0)+'.txt',results,header='wave type, freq (Hz), azimuth (deg), dip (deg), elliptcity, rotation x (deg), wavenumber (/m), velocity (m/s), max norm beam power, SNR, time window number',fmt = '%d, %.4f, %.2f, %.2f, %.3f, %.2f, %.4e, %.2f, %.4e, %.2f, %d')
