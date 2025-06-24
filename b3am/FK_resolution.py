@@ -52,7 +52,7 @@ def FK_resolution(params,coords):
 	if params.want_custom_frange:
 		params.fmin = params.FT_fmin
 		params.fmax = params.FT_fmax
-		params.fstep = params.FT_fstep
+		#params.fstep = params.FT_fstep
 	else:
 		if 1/params.kmax < 500:
 			a = 401
@@ -69,6 +69,6 @@ def FK_resolution(params,coords):
 			a = 4058
 			b = 3818
 		params.fmin = np.round(a/(1/params.kmin + b),1)
-		params.fstep = 0.1
+		#params.fstep = 0.1
 	return params
 

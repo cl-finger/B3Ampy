@@ -117,10 +117,10 @@ params = fkr.FK_resolution(params,coords)
 ###########################################################
 longest_window = params.tw_factor/params.fmin*params.sampling_rate
 params.nwin = int(np.power(2,np.ceil(np.log(longest_window)/np.log(2)))) 
-length_each_ft = params.sampling_rate/params.fstep
-params.nfft = int(np.power(2,np.ceil(np.log(length_each_ft)/np.log(2))))
-if params.nfft < params.nwin:
-	params.nfft = params.nwin
+#length_each_ft = params.sampling_rate/params.fstep
+#params.nfft = int(np.power(2,np.ceil(np.log(length_each_ft)/np.log(2))))
+#if params.nfft < params.nwin:
+params.nfft = params.nwin
 for ii in range(params.nstations):
 	f_,t,DFTE = signal.spectrogram(np.squeeze(data_final[ii,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')   #default: noverlap = 0.5*nwin
 	f_,t,DFTN = signal.spectrogram(np.squeeze(data_final[ii+params.nstations,:]),fs = params.sampling_rate,nperseg=params.nwin,noverlap=params.nwin//2,nfft=params.nfft,detrend='constant',mode='complex')
