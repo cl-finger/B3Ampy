@@ -10,7 +10,7 @@ Output:
 	- wavefield composition
 	- Statistics for each wave type (for data quality check)
 	- Histograms for each wave type (wavenumber, backazimuth, ellipticity and dip vs. frequency), including picked curves
-- list files with picked paramters (wavenumber, backazimuth, ellipticity, dip) for each wave type 
+- list files with picked paramters (wavenumber, backazimuth, ellipticity, dip) for each wave type
 
 ---
 Claudia Finger
@@ -25,9 +25,10 @@ font = {'size':24}
 plt.rc('font',**font)
 import math
 import glob
+import sys
 from scipy import signal
 
-import params 
+import params
 
 filenames = glob.glob(params.outdir+'results_*')
 
@@ -47,7 +48,7 @@ print('total number of results',results.shape)
 
 #results dim: 0: time windows, 1: parameters with:
 	#0: wave type
-	#1: frequency (Hz) 
+	#1: frequency (Hz)
 	#2: backazimuth (deg)
 	#3: dip (deg)
 	#4: ellipticity
@@ -55,7 +56,46 @@ print('total number of results',results.shape)
 	#6: wavenumber (/m)
 	#7: velocity (m/s)
 	#8: max absolute beam power
-	#9: signal-to-noise ratio 
+	#9: signal-to-noise ratio
+
+########################################################################
+### In 1C mode there is no polarisation, so wave_type is always -1    ###
+########################################################################
+
+if params.one_component_mode:
+	frequencies = np.sort(np.unique(results[:,1]))
+	delta_f = 0.5*(frequencies[1]-frequencies[0]) if frequencies.size>1 else 0.5
+	bins_f = np.linspace(frequencies[0]-delta_f,frequencies[-1]+delta_f,frequencies.size+1,endpoint=True)
+
+	#backazimuth bins from the kth grid used in the run
+	kth = np.load(params.outdir+'kth.npy')*180/math.pi
+	delta_th = 0.5*(kth[1]-kth[0])
+	bins_th = np.linspace(kth[0]-delta_th,kth[-1]+delta_th,kth.size+1,endpoint=True)
+
+	#frequency vs backazimuth, weighted by beam power
+	H_th,yedges_f,xedges_th = np.histogram2d(results[:,1],results[:,2],bins=[bins_f,bins_th],weights=results[:,8],density=True)
+
+	### polar plot: frequency vs backazimuth ###
+	fig = plt.figure(figsize=(12,10))
+	ax = fig.add_subplot(111,projection='polar')
+	ax.set_title('frequency vs. backazimuth (1C DAS)',pad=20)
+	pc = ax.pcolormesh(np.deg2rad(xedges_th),yedges_f,H_th,cmap='gray_r',shading='auto')
+	ax.grid(True,color='k',lw=0.6,alpha=0.4)
+	ax.set_thetagrids(np.arange(0,360,45))
+	ax.set_rlabel_position(90)
+	cbar = fig.colorbar(pc,pad=0.1)
+	cbar.set_label('beam power')
+	plt.tight_layout()
+	fig.savefig(params.outdir+'freq_vs_baz_1C.png',dpi=200)
+	plt.close(fig)
+
+
+	print('Saved 1C plots: '+params.outdir+'freq_vs_baz_1C.png')
+	sys.exit(0)
+
+####################################################################
+################### 3C post-processing ############################
+####################################################################
 
 ####################################################
 ### discard of unphysical velocities and low SNR ###
@@ -63,7 +103,7 @@ print('total number of results',results.shape)
 #remove unphysical velocities
 #vmax = 60000
 #mask = results[:,7]<vmax
-#results = results[mask,:] 
+#results = results[mask,:]
 
 ##############################
 ### divide into wave types ###
@@ -82,7 +122,7 @@ mask_pro = results[:,0] == 4
 results_pro = results[mask_pro,:]
 # SH wave
 mask_SH = results[:,0] == 2
-results_SH = results[mask_SH,:] 
+results_SH = results[mask_SH,:]
 
 frequencies = np.sort(np.unique(results[:,1]))
 no_f = len(frequencies)
@@ -105,7 +145,7 @@ fig,axs = plt.subplots(figsize=(20,15))
 axs.set_title('Distribution of wave types for \n f = '+str(np.min(results[:,1]))+' Hz to f = '+str(np.max(results[:,1]))+' Hz')
 axs.pie(sizes,labels=labels,autopct='%1.1f%%',labeldistance=1.1,pctdistance=0.6)
 fig.savefig(params.outdir+'wavetype_pie.png')
- 
+
 ### plot wave types against frequency:histogram ###
 # count per frequeny for each wave type
 count_f_rel = np.zeros((no_f,5))
@@ -128,7 +168,7 @@ for ii in range(no_f):
 	count_f_abs[ii,4] = np.sum(results_pro[idx,8])
 
 	count_f_rel[ii,:] = count_f_rel[ii,:]/np.sum(count_f_rel[ii,:])*100 #normalise to maximum number of time windows)
-	
+
 
 colors='blue','orange','green','red','magenta'
 
@@ -153,7 +193,7 @@ axs.set_ylabel('time window count (%)')
 axs.set_xlabel('frequency (Hz)')
 axs.legend()
 fig.savefig(params.outdir+'wave_types_vs_f_hist_normalised.png')
- 
+
 ### wave type againt frequency: line plot ###
 fig,axs = plt.subplots(figsize=(20,15))
 for ii in range(5):
