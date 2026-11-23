@@ -13,9 +13,10 @@ def get_beampower_fast(data,ka,params):
 	K = params.nstations if params.one_component_mode else 3*params.nstations #1C: one channel per station, 3C: E/N/Z
 	P = np.zeros((params.kth.size,params.kgrid.size,params.Nt))
 	Q = np.zeros((params.kth.size,params.kgrid.size,params.Nt))
+	kaH = np.conj(ka.T)   # Added outside the loop as it does not change between time windows
 	for ip in range(params.Nt): #loop over all time windows
 		print('Calculating beam power for time window '+str(ip+1)+' of  '+str(params.Nt))
-		Pmu = np.dot(np.conj(ka.T),data[ip,:].T) # 19.07.24 added np.conj to ka.T so phi is backazimuth and not propagation direction
+		Pmu = np.dot(kaH,data[ip,:].T)
 		Pmu = Pmu * np.conj(Pmu) * 1/K #* means elementwise computation, no matrix multiplication here
 		Pmu = np.real(Pmu.reshape((params.npolstates,params.kth.size,params.kgrid.size),order='F'))
 		kResp = np.max(Pmu,axis=0)
