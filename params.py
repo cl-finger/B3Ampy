@@ -20,6 +20,10 @@ outdir = indir 					# path to folder where all output is saved
 
 want_beampowerplots = True 			# if True: generate 1 figure per frequency and time window of beam power response
 
+one_component_mode = False      # Set True for 1C beamforming
+
+#component_1c = 2   # Only for 3C input used in 1C beamforming: which component to beamform (0 = E, 1 = N, 2 = Z). Not needed if your data is already single-component (e.g. DAS).
+
 ######################
 ### pre-processing ###
 ######################
