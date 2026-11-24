@@ -75,6 +75,11 @@ for ii in range(params.nstations):
 data = np.load(params.indir+params.indata)
 print('Loaded waveform data with size '+str(data.shape))
 
+# 1C beamforming of 3C input: keep only one component (params.component_1c:
+# 0=E, 1=N, 2=Z) so data becomes (nstations, nsamples).
+if params.one_component_mode and data.ndim == 3:
+	print('3C input detected -> keeping only component '+str(params.component_1c)+' for 1C beamforming')
+	data = data[params.component_1c,:,:]
 
 ######################################
 ### perform pre-processing of data ###
